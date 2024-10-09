@@ -2,6 +2,7 @@ package br.com.fiap.GerenciamentoTrafego.service;
 
 import br.com.fiap.GerenciamentoTrafego.dto.UsuarioCadastroDTO;
 import br.com.fiap.GerenciamentoTrafego.dto.UsuarioExibicaoDTO;
+import br.com.fiap.GerenciamentoTrafego.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.GerenciamentoTrafego.model.Usuario;
 import br.com.fiap.GerenciamentoTrafego.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
@@ -30,7 +31,7 @@ public class UsuarioService {
             return new UsuarioExibicaoDTO(usuario.get());
         }
         else{
-            throw new RuntimeException("Não encontrado.");
+            throw new UsuarioNaoEncontradoException("Usuario não encontrado");
         }
     }
 
@@ -46,7 +47,7 @@ public class UsuarioService {
             usuarioRepository.deleteById(id);
         }
         else {
-            throw new RuntimeException("Não encontrado.");
+            throw new UsuarioNaoEncontradoException("Usuario não encontrado");
         }
 
     }
@@ -57,7 +58,7 @@ public class UsuarioService {
             return usuarioRepository.save(usuario);
         }
         else{
-            throw new RuntimeException("Usuario não encontrado.");
+            throw new UsuarioNaoEncontradoException("Usuario não encontrado");
         }
     }
 
@@ -66,7 +67,7 @@ public class UsuarioService {
         if (usuarioOptional.isPresent()){
             return new UsuarioExibicaoDTO(usuarioOptional.get());
         } else {
-            throw new RuntimeException("Usuário não existe no banco de dados!");
+            throw new UsuarioNaoEncontradoException("Usuario não encontrado");
         }
     }
 

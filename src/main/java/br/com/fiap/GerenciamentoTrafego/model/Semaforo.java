@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Data
 public class Semaforo {
     @Id
     @GeneratedValue(
@@ -28,4 +29,44 @@ public class Semaforo {
     private String lugar;
     private boolean funcionando;
 
+
+    public Long getSemaforoId() {
+        return semaforoId;
+    }
+
+    public void setSemaforoId(Long semaforoId) {
+        this.semaforoId = semaforoId;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(int duracao) {
+        this.duracao = duracao;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public boolean isFuncionando() {
+        return funcionando;
+    }
+
+    public void setFuncionando(boolean funcionando) {
+        this.funcionando = funcionando;
+    }
 }

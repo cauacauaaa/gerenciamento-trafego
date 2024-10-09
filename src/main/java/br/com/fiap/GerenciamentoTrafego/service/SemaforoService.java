@@ -2,6 +2,7 @@ package br.com.fiap.GerenciamentoTrafego.service;
 
 import br.com.fiap.GerenciamentoTrafego.dto.SemaforoCadastroDTO;
 import br.com.fiap.GerenciamentoTrafego.dto.SemaforoExibicaoDTO;
+import br.com.fiap.GerenciamentoTrafego.exception.SemaforoNaoEncontradoException;
 import br.com.fiap.GerenciamentoTrafego.model.Semaforo;
 import br.com.fiap.GerenciamentoTrafego.repository.SemaforoRepository;
 import org.springframework.beans.BeanUtils;
@@ -30,7 +31,7 @@ public class SemaforoService {
             return new SemaforoExibicaoDTO(semaforo.get());
         }
         else{
-            throw new RuntimeException("Semaforo não encontrado.");
+            throw new SemaforoNaoEncontradoException("Semaforo não encontraado");
         }
     }
 
@@ -46,7 +47,7 @@ public class SemaforoService {
             semaforoRepository.deleteById(id);
         }
         else{
-            throw new RuntimeException("Semaforo não encontrado");
+            throw new SemaforoNaoEncontradoException("Semaforo não encontraado");
         }
     }
 
@@ -56,7 +57,7 @@ public class SemaforoService {
             return semaforoRepository.save(semaforo);
         }
         else{
-            throw new RuntimeException("Semaforo não encontrado");
+            throw new SemaforoNaoEncontradoException("Semaforo não encontraado");
         }
     }
 
@@ -66,7 +67,7 @@ public class SemaforoService {
             return new SemaforoExibicaoDTO(semaforoOptional.get());
         }
         else{
-            throw new RuntimeException("Semaforo não encontrado");
+            throw new SemaforoNaoEncontradoException("Semaforo não encontraado");
         }
     }
 
