@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# azure-pipelines.yml
+
+trigger:
+  branches:
+    include:
+      - main  # Ativar o pipeline a cada commit na branch main
+
+jobs:
+- job: Build
+  displayName: 'Build and Test'
+  pool:
+    vmImage: 'ubuntu-latest'  # Usar a imagem mais recente do Ubuntu
+  steps:
+  - task: Checkout@1  # Tarefa para fazer checkout do código
+    inputs:
+      clean: true  # Limpar antes do checkout
+
+  - task: JavaToolInstaller@0  # Tarefa para instalar o Java SDK
+    inputs:
+      versionSpec: '23'  # Versão do Java
+      jdkArchitectureOption: 'x64'  # Arquitetura do JDK
+      jdkFileOption: 'None'  # Não usar um arquivo JDK
+      jdkSourceOption: 'PreInstalled'  # Usar JDK pré-instalado na imagem
+      jdkInstallationDirectory: '$(Agent.ToolsDirectory)/java'  # Diretório de instalação
+
+  - script: |
+      mvn test  
+    displayName: 'Run Unit Tests'  # Nome da etapa
