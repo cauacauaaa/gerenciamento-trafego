@@ -1,0 +1,27 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Aciona o pipeline para cada commit na branch main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest  # Define a imagem da VM que será utilizada
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Faz o checkout do código-fonte
+
+      - name: Setup Java
+        uses: actions/setup-java@v2  # Configura o ambiente Java
+        with:
+          java-version: '23'  # Define a versão do Java a ser utilizada
+          distribution: 'temurin'  # Define a distribuição do JDK
+
+      - name: Build with Maven
+        run: mvn clean package  # Compila o projeto usando Maven
+
+      - name: Run Unit Tests
+        run: mvn test  # Executa os testes
